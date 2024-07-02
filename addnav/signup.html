@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | ADDNAV</title>
+    <link rel="stylesheet" href="../CSS/signup_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="signup-section">
+        <h1>Create Account</h1>
+        <form id="signupForm" action="homepage.html">
+            <div class="input-group">
+
+                <input type="text" placeholder="First Name" id="firstname" required>
+            </div>
+            <div class="input-group">
+                <input type="text" placeholder="Last Name" id="lastname" required>
+            </div>
+            <div class="input-group">
+                <input type="email" placeholder="Email" id="email" required>
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Password" id="signup-password" required>
+                <span class="pass-icon" id="toggleSignupPassword"><img src="../images/eye-off.png" alt="input-icon"></span>
+            </div>
+            <button id="submit" class="signup-button">Sign Up</button>
+            <div class="divider">
+                <span>or</span>
+            </div>
+            <button id="googlebutton" class="google-signup">
+                <img src="../images/gbox_login.png" alt="Google Icon"> Sign Up with GOOGLE
+            </button>
+        </form>
+    </div>
+    <div class="welcome-section">
+        <div class="logo">
+            <img src="../images/log.png" alt="ADDNAV Logo">
+        </div>
+        <div class="welcome-text">
+            <h1><span>Access</span><br>Comfort.<br>Explore.</h1>
+            <p>Already have an account?</p>
+            <a href="login.html"><button class="login-button">LOGIN</button></a>
+        </div>
+    </div>
+    <script src="../JAVASCRIPT/script.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+        import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        const firebaseConfig = { 
+            apiKey: "AIzaSyBSrCASWeJYIQjOWoYpDZJlmpvGqpAQpXo", 
+            authDomain: "rare-428214.firebaseapp.com", 
+            projectId: "rare-428214", 
+            storageBucket: "rare-428214.appspot.com", 
+            messagingSenderId: "409790548548", 
+            appId: "1:409790548548:web:b16a99c8dfa1be259d4a11", 
+            measurementId: "G-K5DVENXRRT" 
+        }; 
+        const app = initializeApp(firebaseConfig); 
+        const analytics = getAnalytics(app);
+        const db = getDatabase(); 
+        const auth = getAuth(app); 
+        
+        let firstName = document.getElementById('firstname');
+        let lastName = document.getElementById('lastname');
+        let Email = document.getElementById('email');
+        let password = document.getElementById('signup-password');
+        let mainform = document.getElementById('signupForm');
+
+        let signupUser = evt => {
+            evt.preventDefault();
+
+            createUserWithEmailAndPassword(auth, Email.value, password.value)
+            .then((credentials)=>{
+
+            })
+            .catch((error)=>{
+                alert(error.message);
+                console.log(error.code);
+                console.log(error.message);
+            })
+        }
+        mainform.addEventListener('submit', signupUser);
+    </script>
+</body>
+
+</html>
